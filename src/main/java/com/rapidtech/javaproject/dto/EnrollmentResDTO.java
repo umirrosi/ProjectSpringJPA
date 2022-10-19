@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EnrollmentResDTO {
-    private Long EnrollmentId;
-    private int Grade;
-    private StudentResDTO studentResDto;
-    private CourseResDTO courseResDto;
+    private Long enrollment_id;
+    private int grade;
+    private StudentResDTO dataStudent;
+    private CourseResDTO dataCourse;
 }

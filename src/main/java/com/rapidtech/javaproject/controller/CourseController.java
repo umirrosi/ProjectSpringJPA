@@ -2,6 +2,8 @@ package com.rapidtech.javaproject.controller;
 
 import com.rapidtech.javaproject.dto.CourseReqDTO;
 import com.rapidtech.javaproject.dto.CourseResDTO;
+import com.rapidtech.javaproject.dto.CourseWithStudentResDTO;
+import com.rapidtech.javaproject.dto.StudentWithCourseResDTO;
 import com.rapidtech.javaproject.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,23 +24,20 @@ public class CourseController {
     }
 
     @GetMapping("/{id}")
-    public CourseReqDTO getByCourseId(@PathVariable("id") Long id)
-    {
+    public CourseReqDTO getByCourseId(@PathVariable("id") Long id) {
 
         return courseService.getCourseById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CourseResDTO insertCourse(@RequestBody CourseReqDTO courseReqDto)
-    {
+    public CourseResDTO insertCourse(@RequestBody CourseReqDTO courseReqDto) {
         return courseService.insertCourse(courseReqDto);
     }
 
     @PutMapping("/{id}")
     public CourseResDTO updateCourse(@PathVariable("id") Long id,
-                                       @RequestBody CourseReqDTO courseReqDto)
-    {
+                                     @RequestBody CourseReqDTO courseReqDto) {
         return courseService.updateCourse(id, courseReqDto);
     }
 
@@ -46,5 +45,10 @@ public class CourseController {
     public String deleteCourse(@PathVariable("id") Long id) {
         courseService.deleteCourse(id);
         return "Data id " + id.toString() + " berhasil dihapus";
+    }
+
+    @GetMapping("/withstudent/{id}")
+    public CourseWithStudentResDTO getCourseWithStudentById(@PathVariable("id") Long id) {
+        return courseService.getCourseWithStudentById(id);
     }
 }

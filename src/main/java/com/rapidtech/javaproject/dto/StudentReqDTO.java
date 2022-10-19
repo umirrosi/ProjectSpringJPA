@@ -12,7 +12,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentReqDTO {
-    private String FirstMidName;
-    private String LastName;
-    private Date EnrollmentDate;
+    private String first_mid_name;
+    private String last_name;
+    private Date enrollment_date;
 }

@@ -1,8 +1,9 @@
 package com.rapidtech.javaproject.service.Impl;
 
-import com.rapidtech.javaproject.dto.CourseReqDTO;
-import com.rapidtech.javaproject.dto.CourseResDTO;
+import com.rapidtech.javaproject.dto.*;
 import com.rapidtech.javaproject.model.PCourse;
+import com.rapidtech.javaproject.model.PEnrollment;
+import com.rapidtech.javaproject.model.PStudent;
 import com.rapidtech.javaproject.repository.CourseRepository;
 import com.rapidtech.javaproject.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,27 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void deleteCourse(Long id)  {
         courseRepository.deleteById(id);
+    }
+
+    @Override
+    public CourseWithStudentResDTO getCourseWithStudentById(Long id) {
+        PCourse course = courseRepository.findById(id).get();
+        List<PEnrollment> enrollmentList = course.getEnrollment();
+        List<StudentResDTO> studentResDtoList = new ArrayList<>();
+        for (PEnrollment enrollment : enrollmentList){
+            studentResDtoList.add(StudentResDTO.builder()
+                    .id(enrollment.getStudent().getId())
+                            .first_mid_name(enrollment.getStudent().getFirst_mid_name())
+                            .last_name(enrollment.getStudent().getLast_name())
+                            .enrollment_date(enrollment.getStudent().getEnrollment_date())
+                    .build());
+        }
+        return CourseWithStudentResDTO.builder()
+                .course_id(course.getCourse_id())
+                .title(course.getTitle())
+                .credits(course.getCourse_id())
+                .students(studentResDtoList)
+        .build();
     }
 }
 

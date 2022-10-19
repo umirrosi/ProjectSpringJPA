@@ -17,12 +17,12 @@ import java.util.List;
 public class PStudent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-    private String FirstMidName;
-    private String LastName;
-    private Date EnrollmentDate;
+    private Long id;
+    private String first_mid_name;
+    private String last_name;
+    private Date enrollment_date;
 
-    @OneToMany(mappedBy = "student",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL)
     private List<PEnrollment> enrollment;
 
 }

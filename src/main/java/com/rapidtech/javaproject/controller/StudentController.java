@@ -50,12 +50,12 @@ public class StudentController {
         return "Data id " + id.toString() + " berhasil dihapus";
     }
 
-    @GetMapping("/with/{id}")
+    @GetMapping("/withcourse/{id}")
     public StudentWithCourseResDTO getStudentWithCourseById(@PathVariable("id") Long id){
         return studentService.getStudentWithCourseById(id);
     }
 
-    @GetMapping("/withcourse")
+    @GetMapping("/studentwithcourse")
     public List<StudentWithCourseResDTO> getAllWithCourse() {
         return studentService.getAllStudentWithCourse();
     }

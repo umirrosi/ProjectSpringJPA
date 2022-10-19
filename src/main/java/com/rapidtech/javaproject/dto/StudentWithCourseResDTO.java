@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Data
@@ -13,9 +13,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentWithCourseResDTO {
-    private Long Id;
-    private String FirstMidName;
-    private String LastName;
-    private Date EnrollmentDate;
-    List<CourseResDTO> courseResDtoList;
+    private Long id;
+    private String first_mid_name;
+    private String last_name;
+    private Date enrollment_date;
+    List<CourseResDTO> courses;
 }

@@ -1,9 +1,6 @@
 package com.rapidtech.javaproject.service;
 
-import com.rapidtech.javaproject.dto.EnrollmentReqDTO;
-import com.rapidtech.javaproject.dto.EnrollmentResDTO;
-import com.rapidtech.javaproject.dto.StudentReqDTO;
-import com.rapidtech.javaproject.dto.StudentResDTO;
+import com.rapidtech.javaproject.dto.*;
 
 import java.util.List;
 

@@ -16,8 +16,8 @@ import java.util.List;
 public class PEnrollment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long EnrollmentId;
-    private int Grade;
+    private Long enrollment_id;
+    private int grade;
 
     @ManyToOne
     @JoinColumn (name="course_id")

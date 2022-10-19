@@ -22,7 +22,7 @@ public class PCourse {
     private String title;
     private int credits;
 
-    @OneToMany(mappedBy = "course",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
     private List<PEnrollment> enrollment;
 
 }

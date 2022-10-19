@@ -1,9 +1,6 @@
 package com.rapidtech.javaproject.service.Impl;
 
-import com.rapidtech.javaproject.dto.CourseResDTO;
-import com.rapidtech.javaproject.dto.EnrollmentReqDTO;
-import com.rapidtech.javaproject.dto.EnrollmentResDTO;
-import com.rapidtech.javaproject.dto.StudentResDTO;
+import com.rapidtech.javaproject.dto.*;
 import com.rapidtech.javaproject.model.PCourse;
 import com.rapidtech.javaproject.model.PEnrollment;
 import com.rapidtech.javaproject.model.PStudent;
@@ -16,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EnrollmentServiceImpl implements EnrollementService {
@@ -35,14 +33,14 @@ public class EnrollmentServiceImpl implements EnrollementService {
         List<PEnrollment> enrollments = enrollmentRepository.findAll();
         for (PEnrollment enrollment : enrollments) {
             enrollmentDtoList.add(EnrollmentResDTO.builder()
-                    .EnrollmentId(enrollment.getEnrollmentId()).Grade(enrollment.getGrade())
-                    .studentResDto(
+                    .enrollment_id(enrollment.getEnrollment_id()).grade(enrollment.getGrade())
+                    .dataStudent(
                             StudentResDTO.builder()
-                                    .Id(enrollment.getStudent().getId())
-                                    .LastName(enrollment.getStudent().getLastName())
-                                    .FirstMidName(enrollment.getStudent().getFirstMidName())
-                                    .EnrollmentDate(enrollment.getStudent().getEnrollmentDate()).build())
-                    .courseResDto(
+                                    .id(enrollment.getStudent().getId())
+                                    .last_name(enrollment.getStudent().getLast_name())
+                                    .first_mid_name(enrollment.getStudent().getFirst_mid_name())
+                                    .enrollment_date(enrollment.getStudent().getEnrollment_date()).build())
+                    .dataCourse(
                             CourseResDTO.builder()
                                     .course_id(enrollment.getCourse().getCourse_id())
                                     .title(enrollment.getCourse().getTitle())
@@ -62,17 +60,31 @@ public class EnrollmentServiceImpl implements EnrollementService {
         PEnrollment newEnrollment = new PEnrollment();
         newEnrollment.setGrade(enrollmentReqDto.getGrade());
         newEnrollment.setStudent(
-                PStudent.builder().Id(enrollmentReqDto.getStudent_id()).build());
+                PStudent.builder().id(enrollmentReqDto.getStudent_id()).build());
         newEnrollment.setCourse(
                 PCourse.builder().course_id(enrollmentReqDto.getCourse_id()).build());
         PEnrollment result = enrollmentRepository.save(newEnrollment);
-        return EnrollmentResDTO.builder().EnrollmentId(result.getEnrollmentId())
-                .Grade(result.getGrade()).build();
+
+        return EnrollmentResDTO.builder().enrollment_id(result.getEnrollment_id())
+                .grade(result.getGrade())
+                //.dataCourse(result.getCourse().getCourse_id())
+                //.dataStudent(result.getStudent().getId())
+                .build();
     }
 
     @Override
     public EnrollmentResDTO updateEnrollment(Long id, EnrollmentReqDTO enrollmentReqDto) {
-        return null;
+        Optional<PEnrollment> updateEnrollment = enrollmentRepository.findById(id);
+        PEnrollment result = new PEnrollment();
+        if(updateEnrollment.isPresent()){
+            PEnrollment enrollment = updateEnrollment.get();
+            enrollment.setGrade(enrollmentReqDto.getGrade());
+            result = enrollmentRepository.save(enrollment);
+        }
+        return  EnrollmentResDTO.builder().enrollment_id(result.getEnrollment_id())
+                //.dataCourse(result.getCourse().getCourse_id())
+                //.course(result.getCourse())
+                .grade(result.getGrade()).build();
     }
 
     @Override
