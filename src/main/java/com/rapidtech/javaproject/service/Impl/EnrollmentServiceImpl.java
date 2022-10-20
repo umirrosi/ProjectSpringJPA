@@ -73,7 +73,7 @@ public class EnrollmentServiceImpl implements EnrollementService {
 
     }
 
-    @Override
+    /*@Override
     public EnrollmentResDTO newStudentEnrollment(NewStudentWithCourseReqDTO newStudentWithCourseReqDTO) {
         PStudent newStudent = PStudent.builder().first_mid_name(newStudentWithCourseReqDTO.getFirst_mid_name())
                 .last_name(newStudentWithCourseReqDTO.getLast_name())
@@ -90,14 +90,14 @@ public class EnrollmentServiceImpl implements EnrollementService {
         PEnrollment result = enrollmentRepository.save(newEnrollment);
 
         return EnrollmentResDTO.builder().build();
-    /*enrollment_id(result.getEnrollment_id())
+     /*enrollment_id(result.getEnrollment_id())
                 .grade(result.getGrade())
                 .dataStudent(StudentResDTO.builder().id(enrollmentReqDto.getStudent_id()).build())
                 .dataCourse(CourseResDTO.builder().course_id(enrollmentReqDto.getCourse_id()).build())
                 .build();*/
-    }
 
-    @Override
+
+    /*@Override
     public EnrollmentResDTO updateEnrollment(Long id, EnrollmentReqDTO enrollmentReqDto) {
         Optional<PEnrollment> updateEnrollment = enrollmentRepository.findById(id);
         PEnrollment result = new PEnrollment();
@@ -106,11 +106,8 @@ public class EnrollmentServiceImpl implements EnrollementService {
             enrollment.setGrade(enrollmentReqDto.getGrade());
             result = enrollmentRepository.save(enrollment);
         }
-        return  EnrollmentResDTO.builder().enrollment_id(result.getEnrollment_id())
-                //.dataCourse(result.getCourse().getCourse_id())
-                //.course(result.getCourse())
-                .grade(result.getGrade()).build();
-    }
+        return  EnrollmentResDTO.builder().build();
+    }*/
 
     @Override
     public void deleteEnrollment(Long id) { enrollmentRepository.deleteById(id);
