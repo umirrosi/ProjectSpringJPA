@@ -42,6 +42,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public List<CourseResDTO> findAllCourseByTitle(String title) {
+        return courseRepository.findAllCourseByTitleContaining(title);
+    }
+
+    @Override
     public CourseResDTO insertCourse(CourseReqDTO courseReqDto) {
         PCourse newCourse = PCourse.builder().title(courseReqDto.getTitle())
                 .credits(courseReqDto.getCredits())

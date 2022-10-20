@@ -67,9 +67,34 @@ public class EnrollmentServiceImpl implements EnrollementService {
 
         return EnrollmentResDTO.builder().enrollment_id(result.getEnrollment_id())
                 .grade(result.getGrade())
-                //.dataCourse(result.getCourse().getCourse_id())
-                //.dataStudent(result.getStudent().getId())
+                .dataStudent(StudentResDTO.builder().id(enrollmentReqDto.getStudent_id()).build())
+                .dataCourse(CourseResDTO.builder().course_id(enrollmentReqDto.getCourse_id()).build())
                 .build();
+
+    }
+
+    @Override
+    public EnrollmentResDTO newStudentEnrollment(NewStudentWithCourseReqDTO newStudentWithCourseReqDTO) {
+        PStudent newStudent = PStudent.builder().first_mid_name(newStudentWithCourseReqDTO.getFirst_mid_name())
+                .last_name(newStudentWithCourseReqDTO.getLast_name())
+                .enrollment_date(newStudentWithCourseReqDTO.getEnrollment_date())
+                .build();
+        PStudent student = studentRepository.save(newStudent);
+
+        PEnrollment newEnrollment = new PEnrollment();
+        newEnrollment.setGrade(newStudentWithCourseReqDTO.getGrade());
+        newEnrollment.setStudent(
+                PStudent.builder().id(newStudentWithCourseReqDTO.getStudent_id()).build());
+        newEnrollment.setCourse(
+                PCourse.builder().course_id(newStudentWithCourseReqDTO.getCourse_id()).build());
+        PEnrollment result = enrollmentRepository.save(newEnrollment);
+
+        return EnrollmentResDTO.builder().build();
+    /*enrollment_id(result.getEnrollment_id())
+                .grade(result.getGrade())
+                .dataStudent(StudentResDTO.builder().id(enrollmentReqDto.getStudent_id()).build())
+                .dataCourse(CourseResDTO.builder().course_id(enrollmentReqDto.getCourse_id()).build())
+                .build();*/
     }
 
     @Override

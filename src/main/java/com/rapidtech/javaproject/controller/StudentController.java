@@ -3,6 +3,7 @@ package com.rapidtech.javaproject.controller;
 import com.rapidtech.javaproject.dto.StudentReqDTO;
 import com.rapidtech.javaproject.dto.StudentResDTO;
 import com.rapidtech.javaproject.dto.StudentWithCourseResDTO;
+import com.rapidtech.javaproject.model.PStudent;
 import com.rapidtech.javaproject.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,11 @@ public class StudentController {
     public List<StudentResDTO> getAllStudent() {
         return studentService.getAllStudent();
     }
+
+    /*@GetMapping("/byfirstmidname")
+    public List<StudentResDTO> getStudentByFirstMidName(@RequestParam (name= "first_mid_name") String first_mid_name){
+        return studentService.findAllStudentByFirstMidName(first_mid_name);
+    }*/
 
     @GetMapping("/{id}")
     public StudentReqDTO getByStudentId(@PathVariable("id") Long id)
@@ -59,6 +65,8 @@ public class StudentController {
     public List<StudentWithCourseResDTO> getAllWithCourse() {
         return studentService.getAllStudentWithCourse();
     }
+
+
 
 
 }

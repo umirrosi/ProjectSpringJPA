@@ -34,6 +34,11 @@ public class StudentServiceImpl implements StudentService {
         return studentResDtoList;
     }
 
+    /*@Override
+    public List<StudentResDTO> findAllStudentByFirstMidName(String first_mid_name) {
+        return studentRepository.findAllStudentByFirstMidName(first_mid_name);
+    }*/
+
     @Override
     public StudentReqDTO getStudentById(Long id) {
         StudentReqDTO studentReqDto = new StudentReqDTO();

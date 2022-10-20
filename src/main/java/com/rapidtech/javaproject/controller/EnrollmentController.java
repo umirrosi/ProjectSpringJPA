@@ -3,6 +3,7 @@ package com.rapidtech.javaproject.controller;
 import com.rapidtech.javaproject.dto.*;
 import com.rapidtech.javaproject.model.PEnrollment;
 import com.rapidtech.javaproject.service.EnrollementService;
+import com.rapidtech.javaproject.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,8 @@ import java.util.List;
 public class EnrollmentController {
     @Autowired
     private EnrollementService enrollmentService;
+    @Autowired
+    private StudentService studentService;
 
     @GetMapping
     public List<EnrollmentResDTO> getAllEnrollment() {
@@ -23,9 +26,22 @@ public class EnrollmentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public EnrollmentResDTO insertEnrollment(@RequestBody EnrollmentReqDTO enrollmentReqDto)
+    public String insertEnrollment(@RequestBody EnrollmentReqDTO enrollmentReqDto)
     {
-       return enrollmentService.insertEnrollment(enrollmentReqDto);
+        enrollmentService.insertEnrollment(enrollmentReqDto);
+        return "Berhasil menambahkan student " + enrollmentReqDto.getStudent_id().toString()+
+                " ke course "+ enrollmentReqDto.getCourse_id().toString();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public String newStudentEnrollment(@RequestBody StudentReqDTO studentReqDto, EnrollmentReqDTO enrollmentReqDto)
+    {
+        studentService.insertStudent(studentReqDto);
+
+        enrollmentService.insertEnrollment(enrollmentReqDto);
+        return "Berhasil menambahkan student baru " + enrollmentReqDto.getStudent_id().toString()+
+                " ke course "+ enrollmentReqDto.getCourse_id().toString();
     }
 
     @PutMapping("/{id}")

@@ -10,6 +10,7 @@ import java.util.List;
 public interface CourseService {
     List<CourseResDTO> getAllCourse();
     CourseReqDTO getCourseById(Long id);
+    List<CourseResDTO> findAllCourseByTitle(String title);
     CourseResDTO insertCourse(CourseReqDTO courseReqDto);
     CourseResDTO updateCourse(Long id, CourseReqDTO courseReqDto);
     void deleteCourse(Long id);

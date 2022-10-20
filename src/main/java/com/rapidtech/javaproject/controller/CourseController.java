@@ -29,6 +29,11 @@ public class CourseController {
         return courseService.getCourseById(id);
     }
 
+    @GetMapping("/bytitle")
+    public List<CourseResDTO> getAllCourseByTitle(@RequestParam (name= "title") String title){
+        return courseService.findAllCourseByTitle(title);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CourseResDTO insertCourse(@RequestBody CourseReqDTO courseReqDto) {
