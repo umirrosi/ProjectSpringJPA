@@ -9,6 +9,7 @@ public interface EnrollementService {
     EnrollmentReqDTO getEnrollmentById(Long id);
     EnrollmentResDTO insertEnrollment(EnrollmentReqDTO enrollmentReqDto);
     //EnrollmentResDTO newStudentEnrollment(NewStudentWithCourseReqDTO newStudentWithCourseReqDTO);
-    //EnrollmentResDTO updateEnrollment(Long id, EnrollmentReqDTO enrollmentReqDto);
+    EnrollmentDTO updateEnrollment(Long id, EnrollmentReqDTO enrollmentReqDto);
     void deleteEnrollment(Long id);
+    //public void removeAllStudent(Long student_id);
 }

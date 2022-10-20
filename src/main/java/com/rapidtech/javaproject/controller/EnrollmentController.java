@@ -26,11 +26,10 @@ public class EnrollmentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String insertEnrollment(@RequestBody EnrollmentReqDTO enrollmentReqDto)
-    {
+    public String insertEnrollment(@RequestBody EnrollmentReqDTO enrollmentReqDto) {
         enrollmentService.insertEnrollment(enrollmentReqDto);
-        return "Berhasil menambahkan student " + enrollmentReqDto.getStudent_id().toString()+
-                " ke course "+ enrollmentReqDto.getCourse_id().toString();
+        return "Berhasil menambahkan student " + enrollmentReqDto.getStudent_id().toString() +
+                " ke course " + enrollmentReqDto.getCourse_id().toString();
     }
 
     /*@PostMapping
@@ -43,11 +42,14 @@ public class EnrollmentController {
                 " ke course "+ enrollmentReqDto.getCourse_id().toString();
     }*/
 
-    /*@PutMapping("/{id}")
-    public String put(@PathVariable("id") Long id, @RequestBody EnrollmentReqDTO enrollmentReqDto){
-        enrollmentService.updateEnrollment (id, enrollmentReqDto);
-        return "Data enrollment id " + id.toString() + " berhasil di update";
-    }*/
+    @PutMapping("/{id}")
+    public String updateEnrollment(@PathVariable("id") Long id,
+                                   @RequestBody EnrollmentReqDTO enrollmentReqDto) {
+        enrollmentService.updateEnrollment(id, enrollmentReqDto);
+        return "Data enrollment id " + id.toString() + " berhasil di perbarui. Student id "
+                + enrollmentReqDto.getStudent_id().toString() + " berhasil di tambah ke Course id "
+                + enrollmentReqDto.getCourse_id().toString();
+    }
 
     @DeleteMapping("/{id}")
     public String deleteEnrollment(@PathVariable("id") Long id) {
@@ -55,5 +57,9 @@ public class EnrollmentController {
         return "Data enrollment id " + id.toString() + " berhasil dihapus";
     }
 
-
+    //@PostMapping("/{student_id}")
+    //public String removeAllStudent(@PathVariable("student_id") Long student_id) {
+      //  enrollmentService.removeAllStudent(student_id);
+        //return "Data student id " + student_id.toString() + " pada semua course berhasil dihapus";
+    //}
 }
